@@ -80,6 +80,7 @@ form .instructions {
 }
 
 table.district td {
+    white-space: nowrap;
 }
 .icon-spacer {
     font-size: 2em;

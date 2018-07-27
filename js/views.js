@@ -34,6 +34,7 @@ ResultView = Backbone.View.extend({
     render: function ()  {
         var taxInfo = this.model.get('taxInfo');
         var propertyTaxInfo = this.model.get('propertyTaxInfo');
+        var homeDistrict = this.model.get('homeDistrict');
         this.$el.html(this.template);
         $('#resultIncome').html(dollars(taxInfo.income));
         $('#taxResult').html(dollars(taxInfo.fti));
@@ -41,6 +42,7 @@ ResultView = Backbone.View.extend({
         $('#homeResult').html(dollars(propertyTaxInfo.homeValue));
         $('#homeLow').html(dollars(propertyTaxInfo.low));
         $('#homeHigh').html(dollars(propertyTaxInfo.high));
+        $('#schoolDistrict').html(homeDistrict.school_district_name);
         
         d3.selectAll('.animate')
             .transition()
