@@ -1,0 +1,97 @@
+body {
+    font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+    font-size: 16px;
+    background-color: rgb(248, 250, 251);
+}
+h1 {
+    font-family: "Roboto Slab", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+    font-size: 1.75em;
+}
+h2 {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 1.75em;
+}
+h3 {
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 1.375em;
+}
+.highlight {
+    color: rgb(255, 107, 107);
+}
+.start-hidden {
+    display: none;
+}
+form label {
+    display: block;
+    margin-bottom: 2px;
+}
+form .instructions {
+    color: gray;
+    font-size: 0.8em;
+}
+
+#header-color {
+    background-color: rgb(248, 250, 251);
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-bottom-color: rgb(219, 222, 225);
+    border-top-color: rgb(219, 222, 225);
+    padding: 12px 20px;
+}
+
+#main-color {
+    background-color: white;
+}
+
+#footer-color {
+    text-align: center;
+    color: #666;
+    font-size: 0.75em;
+    background-color: rgb(248, 250, 251);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: rgb(219, 222, 225);
+    padding: 12px 20px;
+}
+
+#main-container {
+    padding-top: 1em;
+    padding-bottom: 3em;
+}
+
+.dollars {
+    width: 10em;
+}
+
+.icon {
+    color: rgb(255, 107, 107);
+    font-size: 2em;
+    padding-right: 0.5em;
+}
+.savings {
+    text-align: center;
+    width: 10em;
+}
+.district-revenue {
+    text-align: center;
+    width: 8em;
+}
+
+table.district td {
+}
+.icon-spacer {
+    font-size: 2em;
+    width: 0px;
+}
+
+
+#btn-calculate {
+    background-color: #ed1d24;
+    border: none;
+}
+
+#individual-info {
+    max-width: 25em;
+}

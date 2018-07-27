@@ -24,3 +24,8 @@ var LocationCollection = Backbone.Collection.extend({
         return response.results;
     }
 });
+
+/**
+ * Model for tax calculation result
+ */
+var ResultModel = Backbone.Model.extend({});
