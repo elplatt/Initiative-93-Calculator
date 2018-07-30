@@ -3,12 +3,26 @@
  */
 $(document).ready(function () {
     
+    // Create backbone models and views
     var result = new ResultModel({});
     var view = new CalculatorView();
     $('#main-container').append(view.el);
     resultView = new ResultView({ model: result });
     $('#main-container').append(resultView.el);
     
+    // Set up backbone routes
+    var router = new AppRouter();
+    router.on('route:calculator', function() {
+        view.$el.show();
+        resultView.$el.html("");
+    });
+    router.on('route:result', function () {
+        view.$el.hide();
+        resultView.render();
+    });
+    Backbone.history.start();
+    
+    // Handle calculator submission
     $("#calculator").submit(function (e) {
         
         // Prevent page from refreshing
@@ -66,14 +80,27 @@ $(document).ready(function () {
             complete = individualComplete;
         }
         complete.then(function () {
-            view.$el.hide();
-            resultView.render();
+            router.navigate('result', {trigger: true});
         });
         
         return false;
     });
 });
 
+/**
+ * Backbone router to handle navigation.
+ */
+var AppRouter = Backbone.Router.extend({
+    routes: {
+        "": "calculator",
+        "result": "result"
+    }
+});
+
+
+/**
+ * Tax calculation code
+ */
 var taxBrackets = [
     {"max": 5000, "fti": 0, "agi": 196150},
     {"max": 10000, "fti": 0, "agi": 894451},
@@ -113,32 +140,48 @@ var getTax = function (personalIncome, passthroughIncome) {
     // Federal taxable income
     var fti = 0;
     var i;
+    var bracket;
     for (i = 0; i < taxBrackets.length; i++) {
-        if (agi < taxBrackets[i].max) {
-            fti = agi * taxBrackets[i].fti / taxBrackets[i].agi;
+        bracket = taxBrackets[i];
+        if (agi < bracket.max) {
+            fti = agi * bracket.fti / bracket.agi;
+            break;
         }
     }
     // Graduated state income tax
     var low, high;
     var graduated = 0;
-    for (i = 0; i < stateBrackets.length - 1; i++) {
-        low = stateBrackets[i];
-        high = stateBrackets[i+1];
-        if (fti >= high) {
-            graduated += stateRates[i] * (high - low) / 100;
-        } else if (fti > low) {
-            graduated += stateRates[i] * (fti - low) / 100;
+    var bracketTax;
+    for (i = 0; i < stateBrackets.length; i++) {
+        // Handle highest bracket as a special case
+        if (i == stateBrackets.length - 1) {
+            low = stateBrackets[i];
+            bracketTax = stateRates[i] * (fti - low) / 100;
+        } else {
+            // Determine the bounds of the bracket and how much income is
+            // taxed at this rate
+            low = stateBrackets[i];
+            high = stateBrackets[i+1];
+            if (fti >= high) {
+                bracketTax = stateRates[i] * (high - low) / 100;
+            } else if (fti > low) {
+                bracketTax = stateRates[i] * (fti - low) / 100;
+            } else {
+                break;
+            }
         }
+        graduated += bracketTax;
     }
     // Flat state income tax
     var flat = 0.0463 * fti;
-    return {
+    var taxInfo = {
         "graduated": graduated,
         "flat": flat,
         "fti": fti,
         "income": personalIncome,
         "passthrough": passthroughIncome
     };
+    return taxInfo;
 };
 
 var getPropertyTaxHome = function (homeValue, homeDistrict) {

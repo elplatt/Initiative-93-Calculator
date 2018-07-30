@@ -38,7 +38,7 @@ ResultView = Backbone.View.extend({
         this.$el.html(this.template);
         $('#resultIncome').html(dollars(taxInfo.income));
         $('#taxResult').html(dollars(taxInfo.fti));
-        $('#extraIncome').html(dollars(taxInfo.graduated - taxInfo.flat));
+        $('#extraTax').html(dollars(taxInfo.graduated - taxInfo.flat));
         $('#homeResult').html(dollars(propertyTaxInfo.homeValue));
         $('#homeLow').html(dollars(propertyTaxInfo.low));
         $('#homeHigh').html(dollars(propertyTaxInfo.high));
