@@ -1,4 +1,9 @@
 /**
+ * Convert TopoJSON to GeoJSON.
+ */
+districtGeo = topojson.feature(districtsTopo, districtsTopo.objects.CDPHE_CDOE_School_District_Boundaries);
+
+/**
  * Initialization code, run after entire page has loaded.
  */
 $(document).ready(function () {
@@ -17,6 +22,10 @@ $(document).ready(function () {
         resultView.$el.html("");
     });
     router.on('route:result', function () {
+        if (typeof(result.get('taxInfo')) === 'undefined') {
+            router.navigate('calculator', {trigger: true});
+            return;
+        }
         view.$el.hide();
         resultView.render();
     });

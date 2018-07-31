@@ -42,8 +42,6 @@ ResultView = Backbone.View.extend({
         $('#homeResult').html(dollars(propertyTaxInfo.homeValue));
         $('#homeLow').html(dollars(propertyTaxInfo.low));
         $('#homeHigh').html(dollars(propertyTaxInfo.high));
-        $('#schoolDistrict').html(homeDistrict.school_district_name);
-        
         d3.selectAll('.animate')
             .transition()
             .duration(1000)
@@ -65,7 +63,7 @@ ResultView = Backbone.View.extend({
             $('.business').hide();
         }
         var district = this.model.get('homeDistrict');
-        $('#schoolDistrict').html(district.school_district_name);
+        $('#schoolDistrict').html(district.school_district);
         $('#perStudent').html(dollars(district.funding_increase / district.pupil_count));
         $('#total').html(dollars(district.funding_increase));
     }
