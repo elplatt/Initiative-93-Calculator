@@ -55,6 +55,7 @@ $(document).ready(function () {
             result.set({ homeDistrict: homeDistrict });
             var taxInfo = getTax($("#income").val(), $("#passthrough").val());
             var propertyTaxInfo = getPropertyTaxHome(parseInt($("#homeValue").val()), homeDistrict);
+            console.log(taxInfo);
             result.set({
                 taxInfo: taxInfo,
                 propertyTaxInfo: propertyTaxInfo
@@ -161,7 +162,8 @@ var getTax = function (personalIncome, passthroughIncome) {
     var low, high;
     var graduated = 0;
     var bracketTax;
-    for (i = 0; i < stateBrackets.length; i++) {
+    var bracketAmounts = [];
+    for (i = 0; i < stateBrackets.length - 1; i++) {
         // Handle highest bracket as a special case
         if (i == stateBrackets.length - 1) {
             low = stateBrackets[i];
@@ -180,6 +182,7 @@ var getTax = function (personalIncome, passthroughIncome) {
             }
         }
         graduated += bracketTax;
+        bracketAmounts.push(bracketTax);
     }
     // Flat state income tax
     var flat = 0.0463 * fti;
@@ -188,7 +191,8 @@ var getTax = function (personalIncome, passthroughIncome) {
         "flat": flat,
         "fti": fti,
         "income": personalIncome,
-        "passthrough": passthroughIncome
+        "passthrough": passthroughIncome,
+        "bracketAmounts": bracketAmounts
     };
     return taxInfo;
 };
