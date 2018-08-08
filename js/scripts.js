@@ -59,7 +59,6 @@ $(document).ready(function () {
             var propertyTaxInfo = getPropertyTaxHome(
                 parseDollar($("#homeValue").val()),
                 homeDistrict);
-            console.log(taxInfo);
             result.set({
                 taxInfo: taxInfo,
                 propertyTaxInfo: propertyTaxInfo
@@ -230,7 +229,7 @@ var getPropertyTaxBusiness = function (businessValue, businessDistrict) {
 };
 
 var dollars = function (n) {
-    return "$" + Number(Math.round(n)).toLocaleString();
+    return "$" + Number(Math.round(Math.abs(n))).toLocaleString();
 };
 
 var parseDollar = function (s) {

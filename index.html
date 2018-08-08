@@ -126,7 +126,7 @@
       <div id="business-property-group" class="start-hidden">
         <div class="row">
           <div class="form-group col-xs-12">
-            <label for="businessValue">Business Property Value</label>
+            <label for="businessValue">Property Value</label>
             <div class="input-group dollars">
               <div class="input-group-addon">
                 <div class="input-group-text">$</div>
@@ -137,7 +137,7 @@
         </div>
         <div class="row">
           <div class="form-group col-xs-8 col-sm-7 col-md-6 col-lg-4">
-            <label for="businessStreet">Business Street Address</label>
+            <label for="businessStreet">Street Address</label>
             <input class="form-control" id="businessStreet" type="text" value=""/>                    
           </div>
         </div>
@@ -159,7 +159,7 @@
   <script id="tpl-result-view" type="text/template">
     <div class="row individual">
       <div class="col-xs-12">
-        <h2>Impact on Individual</h2>
+        <h2>Impact on Tax Filer</h2>
       </div>
     </div>
     <div class="row business start-hidden">
@@ -179,7 +179,7 @@
               <td id="resultIncome">$100,000</td>
             </tr>
             <tr>
-              <th>Federal Taxable Income</th>
+              <th>Taxable Income</th>
               <td id="taxResult">$100,000</td>
             </tr>
             <tr class="home">
@@ -195,8 +195,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-7">
-        <h3>State Tax Changes Under Initiative</h3>
+      <div class="col-sm-7" id="amendment-changes">
+        <h3>Tax Changes Under Amendment 73</h3>
         <table>
           <tbody>
             <tr>
@@ -222,11 +222,24 @@
               </td>
               <td>property tax savings</td>
             </tr>
+            <tr>
+              <td class="icon"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span></td>
+              <td class="savings">
+                <span id="netLowUp" class="glyphicon glyphicon-arrow-up start-hidden result-expense" ></span>
+                <span id="netLowDown" class="glyphicon glyphicon-arrow-down start-hidden result-savings"></span>
+                <span class="animate" id="netLow">$0</span>
+                &ndash;
+                <span id="netHighUp" class="glyphicon glyphicon-arrow-up start-hidden result-expense" ></span>
+                <span id="netHighDown" class="glyphicon glyphicon-arrow-down start-hidden result-savings"></span>
+                </span><span class="animate" id="netHigh">$0</span>
+              </td>
+              <td>net change</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <div class="col-sm-5">
-        <h3>New Revenue</h3>
+      <div class="col-sm-5" id="new-district-revenue">
+        <h3>Annual, New Revenue for</h3>
         <table class="district">
           <tbody>
             <tr>
@@ -239,7 +252,7 @@
             </tr>
             <tr>
               <td class="district-revenue">
-                <span class="animate" id="perStudent">$0</span>
+                <span class="animate result-savings" id="perStudent">$0</span>
               </td>
               <td>per student</td>
               <td class="icon-spacer">
@@ -248,7 +261,7 @@
             </tr>
             <tr>
               <td class="district-revenue">
-                <span class="animate" id="total">$0</span>
+                <span class="animate result-savings" id="total">$0</span>
               </td>
               <td>total</td>
               <td class="icon-spacer">

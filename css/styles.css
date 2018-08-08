@@ -96,3 +96,21 @@ table.district td {
 #individual-info {
     max-width: 25em;
 }
+
+#amendment-changes {
+    overflow: hidden;
+}
+
+#new-district-revenue {
+    overflow: hidden;
+    border: solid 1px black;
+    background: rgb(248, 250, 251);
+}
+
+.result-savings {
+    color: green;
+}
+
+.result-expense {
+    color: red;
+}
