@@ -60,25 +60,31 @@
       <div class="row">
         <div class="form-group col-xs-8 col-sm-7 col-md-6 col-lg-4">
           <label for="street">Street Address</label>
-          <input class="form-control" id="street" type="text" value=""/>
+          <input class="form-control" id="street" type="text" value="" required="true"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-xs-5 col-sm-5 col-md-4 col-lg-3">
           <label for="city">City</label>
-          <input class="form-control" id="city" type="text" value=""/>
+          <input class="form-control" id="city" type="text" value="" required="true"/>
         </div>
         <div class="form-group col-xs-3 col-sm-2 col-md-2 col-lg-1">
           <label for="postal">Zip</label>
-          <input class="form-control" id="postal" type="text" size="5" value=""/>
+          <input class="form-control" id="postal" type="text" size="5" value="" required="true"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-xs-12">
           Are you a business owner, farmer or rancher?<br/>
-          <div class="checkbox">
+          <div class="radio">
             <label>
-              <input id="business" type="checkbox"/>
+              <input id="businessNo" type="radio" name="business" value="no" checked="checked"/>
+              No
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input id="businessYes" type="radio" name="business" value="yes"/>
               Yes
             </label>
           </div>
@@ -102,9 +108,15 @@
         <div class="row">
           <div class="form-group col-xs-12">
             Do you own a business property, farm, or ranch?<br/>
-            <div class="checkbox">
+            <div class="radio">
               <label>
-                <input id="businessProperty" type="checkbox"/>
+                <input id="businessPropertyNo" type="radio" name="businessProperty" value="no" checked="checked"/>
+                No
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input id="businessPropertyYes" type="radio" name="businessProperty" value="yes"/>
                 Yes
               </label>
             </div>

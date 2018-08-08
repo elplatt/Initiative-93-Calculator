@@ -38,7 +38,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         // Create model to hold results
-        var businessProperty = $("#businessProperty").is(":checked");
+        var businessProperty = $("#businessPropertyYes").is(":checked");
         result.set({business: businessProperty});
         
         // Construct home address and get individual tax info
@@ -53,8 +53,12 @@ $(document).ready(function () {
             var loc = l.models[0].attributes.geometry.location;
             var homeDistrict = getDistrict(loc);
             result.set({ homeDistrict: homeDistrict });
-            var taxInfo = getTax($("#income").val(), $("#passthrough").val());
-            var propertyTaxInfo = getPropertyTaxHome(parseInt($("#homeValue").val()), homeDistrict);
+            var taxInfo = getTax(
+                parseDollar($("#income").val()),
+                parseDollar($("#passthrough").val()));
+            var propertyTaxInfo = getPropertyTaxHome(
+                parseDollar($("#homeValue").val()),
+                homeDistrict);
             console.log(taxInfo);
             result.set({
                 taxInfo: taxInfo,
@@ -75,7 +79,9 @@ $(document).ready(function () {
             businessComplete = bl.fetch({ success: function () {
                 var loc = bl.models[0].attributes.geometry.location;
                 var businessDistrict = getDistrict(loc);
-                var businessTaxInfo = getPropertyTaxBusiness(parseInt($("#businessValue").val()), businessDistrict);
+                var businessTaxInfo = getPropertyTaxBusiness(
+                    parseDollar($("#businessValue").val()),
+                    businessDistrict);
                 result.set({
                     businessTaxInfo: businessTaxInfo
                 });
@@ -137,7 +143,7 @@ var getDistrict = function (loc) {
         }
     }
     for (i = 0; i < districtInfo.length; i++) {
-        if (districtInfo[i].geoid == geoid) {
+        if (parseInt(districtInfo[i].geoid) == geoid) {
             return districtInfo[i];
         }
     }
@@ -225,4 +231,8 @@ var getPropertyTaxBusiness = function (businessValue, businessDistrict) {
 
 var dollars = function (n) {
     return "$" + Number(Math.round(n)).toLocaleString();
+};
+
+var parseDollar = function (s) {
+    return parseInt(s.replace(/[,|\s|\$]/g, ""));
 };

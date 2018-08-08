@@ -5,20 +5,24 @@ CalculatorView = Backbone.View.extend({
     },
     render: function () {
         this.$el.html(this.template);
-        this.$el.find("#business").on('click', this.onBusinessClick);
-        this.$el.find("#businessProperty").on('click', this.onBusinessPropertyClick);
+        this.$el.find("#businessYes").on('click', this.onBusinessClick);
+        this.$el.find("#businessNo").on('click', this.onBusinessClick);
+        this.$el.find("#businessPropertyYes").on('click', this.onBusinessPropertyClick);
+        this.$el.find("#businessPropertyNo").on('click', this.onBusinessPropertyClick);
     },
-    onBusinessClick: function (e) {
+    onBusinessClick: function () {
         // Check if turned on or off and display or hide additional info
-        if ($(e.currentTarget).is(":checked")) {
+        if ($("#businessYes").is(":checked")) {
             $('#business-group').slideDown(500);
         } else {
             $('#business-group').slideUp(500);
+            $('#business-property-group').slideUp(500);
+            $('#businessPropertyNo').prop("checked", "true");
         }
     },
-    onBusinessPropertyClick: function (e) {
+    onBusinessPropertyClick: function () {
         // Check if turned on or off and display or hide additional info
-        if ($(e.currentTarget).is(":checked")) {
+        if ($("#businessPropertyYes").is(":checked")) {
             $('#business-property-group').slideDown(500);
         } else {
             $('#business-property-group').slideUp(500);
