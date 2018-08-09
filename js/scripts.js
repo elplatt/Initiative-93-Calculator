@@ -20,6 +20,7 @@ $(document).ready(function () {
     router.on('route:calculator', function() {
         view.$el.show();
         resultView.$el.html("");
+        $("#income").focus();
     });
     router.on('route:result', function () {
         if (typeof(result.get('taxInfo')) === 'undefined') {
@@ -30,6 +31,8 @@ $(document).ready(function () {
         resultView.render();
     });
     Backbone.history.start();
+    $("input:text").focus(function () { this.select(); });
+    $("#income").focus();
     
     // Handle calculator submission
     $("#calculator").submit(function (e) {
@@ -108,9 +111,11 @@ $(document).ready(function () {
 var AppRouter = Backbone.Router.extend({
     routes: {
         "": "calculator",
+        "calculator": "calculator",
         "result": "result"
     }
 });
+var router = new AppRouter();
 
 
 /**
@@ -158,7 +163,7 @@ var getTax = function (personalIncome, passthroughIncome) {
     var bracket;
     for (i = 0; i < taxBrackets.length; i++) {
         bracket = taxBrackets[i];
-        if (agi < bracket.max) {
+        if (agi <= bracket.max) {
             fti = agi * bracket.fti / bracket.agi;
             break;
         }
@@ -168,7 +173,7 @@ var getTax = function (personalIncome, passthroughIncome) {
     var graduated = 0;
     var bracketTax;
     var bracketAmounts = [];
-    for (i = 0; i < stateBrackets.length - 1; i++) {
+    for (i = 0; i < stateBrackets.length; i++) {
         // Handle highest bracket as a special case
         if (i == stateBrackets.length - 1) {
             low = stateBrackets[i];

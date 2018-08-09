@@ -41,12 +41,12 @@ CalculatorView = Backbone.View.extend({
 ResultView = Backbone.View.extend({
     template: _.template($('#tpl-result-view').html()),
     model: ResultModel,
-    initialize: function() {
-    },
+    initialize: function() {},
     render: function ()  {
         var taxInfo = this.model.get('taxInfo');
         var propertyTaxInfo = this.model.get('propertyTaxInfo');
         var homeDistrict = this.model.get('homeDistrict');
+        console.log(taxInfo);
         var netLow = taxInfo.graduated - taxInfo.flat - propertyTaxInfo.high;
         var netHigh = taxInfo.graduated - taxInfo.flat - propertyTaxInfo.low;
         this.$el.html(this.template);
@@ -88,28 +88,27 @@ ResultView = Backbone.View.extend({
         $('#total').html(dollars(district.funding_increase));
         $('#netLow').html(dollars(netLow));
         $('#netHigh').html(dollars(netHigh));
-        if (taxInfo.graduated > taxInfo.flat) {
-            $("#extraTax").addClass("result-expense");
-        } else {
-            $("#extraTax").addClass("result-savings");
-        }
         if (propertyTaxInfo.low > 0) {
             $("#homeLow").addClass("result-savings");
             $("#homeHigh").addClass("result-savings");
         }
-        if (netLow > 0) {
-            $("#netLow").addClass("result-expense");
-            $("#netLowUp").show();
-        } else {
+        console.log(netLow);
+        if (netLow < 0) {
             $("#netLow").addClass("result-savings");
             $("#netLowDown").show();
-        }
-        if (netHigh > 0) {
-            $("#netHigh").addClass("result-expense");
-            $("#netHighUp").show();
         } else {
+            $("#netLow").addClass("result-expense");
+            $("#netLowUp").show();
+        }
+        if (netHigh < 0) {
             $("#netHigh").addClass("result-savings");
             $("#netHighDown").show();
+        } else {
+            $("#netHigh").addClass("result-expense");
+            $("#netHighUp").show();
         }
+        $('#redo').on('click', function () {
+            router.navigate('calculator', {trigger: true});            
+        });
     }
 });

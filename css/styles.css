@@ -69,10 +69,15 @@ form .instructions {
     color: rgb(255, 107, 107);
     font-size: 2em;
     padding-right: 0.5em;
+    height: 45px;
+}
+.icon img {
+    position: relative;
+    top: -7px;
 }
 .savings {
     text-align: center;
-    width: 10em;
+    width: 12em;
 }
 .district-revenue {
     text-align: center;
@@ -97,6 +102,10 @@ table.district td {
     max-width: 25em;
 }
 
+#redo {
+    margin-top: -10px;
+}
+
 #amendment-changes {
     overflow: hidden;
 }
@@ -112,5 +121,4 @@ table.district td {
 }
 
 .result-expense {
-    color: red;
 }
