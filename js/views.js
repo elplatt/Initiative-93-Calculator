@@ -46,7 +46,6 @@ ResultView = Backbone.View.extend({
         var taxInfo = this.model.get('taxInfo');
         var propertyTaxInfo = this.model.get('propertyTaxInfo');
         var homeDistrict = this.model.get('homeDistrict');
-        console.log(taxInfo);
         var netLow = taxInfo.graduated - taxInfo.flat - propertyTaxInfo.high;
         var netHigh = taxInfo.graduated - taxInfo.flat - propertyTaxInfo.low;
         this.$el.html(this.template);
@@ -92,7 +91,6 @@ ResultView = Backbone.View.extend({
             $("#homeLow").addClass("result-savings");
             $("#homeHigh").addClass("result-savings");
         }
-        console.log(netLow);
         if (netLow < 0) {
             $("#netLow").addClass("result-savings");
             $("#netLowDown").show();

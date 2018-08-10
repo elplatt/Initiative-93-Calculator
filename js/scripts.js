@@ -177,6 +177,9 @@ var getTax = function (personalIncome, passthroughIncome) {
         // Handle highest bracket as a special case
         if (i == stateBrackets.length - 1) {
             low = stateBrackets[i];
+            if (fti <= low) {
+                break;
+            }
             bracketTax = stateRates[i] * (fti - low) / 100;
         } else {
             // Determine the bounds of the bracket and how much income is
