@@ -85,12 +85,16 @@ ResultView = Backbone.View.extend({
         $('#schoolDistrict').html(district.school_district);
         $('#perStudent').html(dollars(district.funding_increase / district.pupil_count));
         $('#total').html(dollars(district.funding_increase));
-        $('#netLow').html(dollars(netLow));
-        $('#netHigh').html(dollars(netHigh));
         if (propertyTaxInfo.low > 0) {
             $("#homeLow").addClass("result-savings");
             $("#homeHigh").addClass("result-savings");
         }
+        if (netLow <= 0 && netHigh <= 0) {
+            netLow = netHigh;
+            netHigh = t;
+        }
+        $('#netLow').html(dollars(netLow));
+        $('#netHigh').html(dollars(netHigh));
         if (netLow < 0) {
             $("#netLow").addClass("result-savings");
             $("#netLowDown").show();
