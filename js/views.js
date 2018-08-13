@@ -90,6 +90,7 @@ ResultView = Backbone.View.extend({
             $("#homeHigh").addClass("result-savings");
         }
         if (netLow <= 0 && netHigh <= 0) {
+            var t = netLow;
             netLow = netHigh;
             netHigh = t;
         }

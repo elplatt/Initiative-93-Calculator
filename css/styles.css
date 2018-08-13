@@ -93,7 +93,7 @@ table.district td {
 }
 
 
-#btn-calculate {
+#btn-calculate, #redo {
     background-color: #ed1d24;
     border: none;
 }
