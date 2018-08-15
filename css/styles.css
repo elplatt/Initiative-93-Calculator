@@ -75,6 +75,9 @@ form .instructions {
     position: relative;
     top: -7px;
 }
+.text-muted {
+    font-size: 0.75em;
+}
 .savings {
     text-align: center;
     width: 12em;
@@ -87,6 +90,10 @@ form .instructions {
 table.district td {
     white-space: nowrap;
 }
+#perstudent-label {
+    white-space: normal;
+}
+
 .icon-spacer {
     font-size: 2em;
     width: 0px;
@@ -96,14 +103,11 @@ table.district td {
 #btn-calculate, #redo {
     background-color: #ed1d24;
     border: none;
+    margin-top: 15px;
 }
 
 #individual-info {
     max-width: 25em;
-}
-
-#redo {
-    margin-top: -10px;
 }
 
 #amendment-changes {

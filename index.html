@@ -30,14 +30,13 @@
   <script id="tpl-calculator-view" type="text/template">
     <div class="row">
       <div class="col-xs-12">
-        <p>Are you curious to see how this ballot initiative would impact your taxes and the revenue to your local schools?</p>
-        <p>Please fill out a few questions about your personal financial position to allow us to create your personal estimate. Some questions will ask for additional information depending on initial answers.</p>
-      </div>
+<p>Amendment 73 (A73) will stabilize and increase funding for preschool through twelfth grade public education, depositing the new revenue in the Quality Public Education Fund. This tax calculator allows you to enter information as a tax filer in order to see how Amendment 73 would impact you and your local school district based on current assessment and tax rates in place today.</p>
+<p>In order to calculate the impact on your taxes and your local school district, we need your address. None of the information provided will be stored, shared or used in any way beyond making your personal calculation on the tax calculator.      </div></p>
     </div>
     <form id="calculator">
       <div class="row">
         <div class="form-group col-xs-12">
-          <label for="income">Annual Income</label>
+          <label for="income">Annual Income (before exemptions and deductions)</label>
           <div class="input-group dollars">
             <div class="input-group-addon">
               <div class="input-group-text">$</div>
@@ -143,7 +142,7 @@
         </div>
         <div class="row">
           <div class="form-group col-xs-5 col-sm-5 col-md-4 col-lg-3">
-            <label for="businessCity">Business City</label>
+            <label for="businessCity">City</label>
             <input class="form-control" id="businessCity" type="text" value=""/>
           </div>
           <div class="form-group col-xs-3 col-sm-2 col-md-2 col-lg-1">
@@ -195,13 +194,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 form-group">
-        <button id="redo" type="button" class="btn btn-primary">Try Different Scenario</button>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-sm-7" id="amendment-changes">
-        <h3>Tax Changes Under Amendment 73</h3>
+        <h3>Tax Changes Under Amendment 73<sup>*</sup></h3>
         <table>
           <tbody>
             <tr>
@@ -242,19 +236,12 @@
             </tr>
           </tbody>
         </table>
+<p class="text-muted">*Estimates are based on current assessment and tax rates. Without A73, a formula currently in the constitution is projected to lower residential assessment rates in 2019 below 7%. A73 will lower and then freeze the residential assessment rate at 7.0%.</p>
       </div>
       <div class="col-sm-5" id="new-district-revenue">
-        <h3>Annual New Revenue from Amendment 73 for</h3>
+        <h3>Annual, New Revenue from Amendment 73 results in</h3>
         <table class="district">
           <tbody>
-            <tr>
-              <td colspan="2">
-                <span id="schoolDistrict">School District</span>
-              </td>
-              <td class="icon-spacer">
-                &nbsp;
-              </td>
-            </tr>
             <tr>
               <td class="icon">
                 <img width="48" height="35"  src="img/student.png"/>
@@ -262,7 +249,15 @@
               <td class="district-revenue">
                 <span class="animate result-savings" id="perStudent">$0</span>
               </td>
-              <td>per student</td>
+              <td id="perstudent-label">average increase per student</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <span id="schoolDistrict">School District</span>
+              </td>
+              <td class="icon-spacer">
+                &nbsp;
+              </td>
             </tr>
             <tr>
               <td class="icon">
@@ -275,6 +270,11 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button id="redo" type="button" class="btn btn-primary">Try Different Scenario</button>
       </div>
     </div>
   </script>
@@ -294,10 +294,23 @@
     <div id="main-color">
       <div id="main-container" class="container">
       </div>
+      <div id="disclaimer" class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="text-muted">
+This tax calculator is for general information only and does not represent personal tax advice either expressed or implied. The calculations used assume an average taxpayer.  It is an approximation. 
+This calculator relies on DOR data to convert income to "taxable income."  See Table 12 page 91 of the 
+<a target="_blank" href="https://www.colorado.gov/pacific/sites/default/files/2016%20Tax%20Profile%20and%20Expenditure%20Report.pdf">Colorado Tax Profile Expenditure Survey</a>.
+CFI modified this data to include federal tax code changes that occured in December 2017 (specifically the eliminate of the personal exemption and the doubling of the standard deduction).  This had the effect of expanding taxable income. 
+For instance, before the federal tax changes, a  Colorado taxpayer would need about $200,000 in income to reach $150,000 in taxable income.  Now a taxpayer needs about $180,000 in income to reach $150,000 in taxable income.<br/>
+*Remember: Some taxpayers can deduct state income taxes paid from their federal tax liability.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="footer-color">
       <div class="container" id="footer-container">
-        <div class="row">
           <div class="col-xs-12">
             Web development by <a href="https://elplatt.com" target="_blank">elplatt</a>.
           </div>
