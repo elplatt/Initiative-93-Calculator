@@ -52,6 +52,7 @@ $(document).ready(function () {
         var l = new LocationCollection(null, {
             address: address
         });
+        /* Replace async with dummy info for demo
         var individualComplete = l.fetch({ success: function () {
             var loc = l.models[0].attributes.geometry.location;
             var homeDistrict = getDistrict(loc);
@@ -67,6 +68,19 @@ $(document).ready(function () {
                 propertyTaxInfo: propertyTaxInfo
             });
         }});
+        */
+        var homeDistrict = districtInfo[11];
+        result.set({ homeDistrict: homeDistrict });
+        var taxInfo = getTax(
+            parseDollar($("#income").val()),
+            parseDollar($("#passthrough").val()));
+        var propertyTaxInfo = getPropertyTaxHome(
+            parseDollar($("#homeValue").val()),
+            homeDistrict);
+        result.set({
+            taxInfo: taxInfo,
+            propertyTaxInfo: propertyTaxInfo
+        });
         
         // Construct business address and get business tax info
         var businessComplete;
@@ -78,6 +92,7 @@ $(document).ready(function () {
             bl = new LocationCollection(null, {
                 address: businessAddress
             });
+            /*
             businessComplete = bl.fetch({ success: function () {
                 var loc = bl.models[0].attributes.geometry.location;
                 var businessDistrict = getDistrict(loc);
@@ -88,9 +103,18 @@ $(document).ready(function () {
                     businessTaxInfo: businessTaxInfo
                 });
             }});
+            */
+            var businessDistrict = districtInfo[44];
+            var businessTaxInfo = getPropertyTaxBusiness(
+                parseDollar($("#businessValue").val()),
+                businessDistrict);
+            result.set({
+                businessTaxInfo: businessTaxInfo
+            });
         }
         
         // Wait for calculation to complete
+/*
         var complete;
         if (businessProperty) {
             complete = $.when(individualComplete, businessComplete);
@@ -100,6 +124,8 @@ $(document).ready(function () {
         complete.then(function () {
             router.navigate('result', {trigger: true});
         });
+*/
+        router.navigate('result', {trigger: true});
         
         return false;
     });

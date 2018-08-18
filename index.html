@@ -41,7 +41,7 @@
             <div class="input-group-addon">
               <div class="input-group-text">$</div>
             </div>
-            <input class="form-control" id="income" type="text" value="0" size="9"/>
+            <input class="form-control" id="income" type="text" value="200000" size="9" />
           </div>
         </div>
       </div>
@@ -52,24 +52,24 @@
             <div class="input-group-addon">
               <div class="input-group-text">$</div>
             </div>
-            <input class="form-control" id="homeValue" type="text" value="0" size="9"/>
+            <input class="form-control" id="homeValue" type="text" value="600000" size="9"/>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-xs-8 col-sm-7 col-md-6 col-lg-4">
           <label for="street">Street Address</label>
-          <input class="form-control" id="street" type="text" value="" required="true"/>
+          <input class="form-control" id="street" type="text" required="true" value="15701 E. 1st Ave"/>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-xs-5 col-sm-5 col-md-4 col-lg-3">
           <label for="city">City</label>
-          <input class="form-control" id="city" type="text" value="" required="true"/>
+          <input class="form-control" id="city" type="text" value="Aurora" required="true"/>
         </div>
         <div class="form-group col-xs-3 col-sm-2 col-md-2 col-lg-1">
           <label for="postal">Zip</label>
-          <input class="form-control" id="postal" type="text" size="5" value="" required="true"/>
+          <input class="form-control" id="postal" type="text" size="5" value="80011" required="true"/>
         </div>
       </div>
       <div class="row">
@@ -97,7 +97,7 @@
               <div class="input-group-addon">
                 <div class="input-group-text">$</div>
               </div>
-              <input class="form-control" id="passthrough" type="text" value="0"/>
+              <input class="form-control" id="passthrough" type="text" value="50000"/>
             </div>
             <small class="form-text text-muted">
               How much of the personal income reported above is earned as profit from pass-through business (LLC, S-Corps, Sole Proprietorships, Partnerships)?
@@ -130,24 +130,24 @@
               <div class="input-group-addon">
                 <div class="input-group-text">$</div>
               </div>
-              <input class="form-control" id="businessValue" type="text" value=""/>
+              <input class="form-control" id="businessValue" type="text" value="1000000"/>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-xs-8 col-sm-7 col-md-6 col-lg-4">
             <label for="businessStreet">Street Address</label>
-            <input class="form-control" id="businessStreet" type="text" value=""/>                    
+            <input class="form-control" id="businessStreet" type="text" value="1860 Lincoln St."/>                    
           </div>
         </div>
         <div class="row">
           <div class="form-group col-xs-5 col-sm-5 col-md-4 col-lg-3">
             <label for="businessCity">City</label>
-            <input class="form-control" id="businessCity" type="text" value=""/>
+            <input class="form-control" id="businessCity" type="text" value="Denver"/>
           </div>
           <div class="form-group col-xs-3 col-sm-2 col-md-2 col-lg-1">
             <label for="businesPostal">Zip</label>
-            <input class="form-control" id="businessPostal" type="text" size="5" value=""/>
+            <input class="form-control" id="businessPostal" type="text" size="5" value="80203"/>
           </div>
         </div>
       </div>
@@ -250,7 +250,7 @@
                 <!-- Replaced with average
                 <span class="animate result-savings" id="perStudent">$0</span>
                 -->
-                <span class="animate">$1600</span>
+                <span class="animate result-savings">$1600</span>
               </td>
               <td id="perstudent-label">average increase per student</td>
             </tr>
@@ -329,7 +329,9 @@ For instance, before the federal tax changes, a  Colorado taxpayer would need ab
     <script src="lib/backbone/backbone-min.js"></script>
     <script src="lib/d3/d3.min.js"></script>
     <script src="lib/d3/topojson.v1.min.js"></script>
+    <!-- Removed for demo
     <script src="js/config.js"></script>
+    -->
     <script src="js/models.js"></script>
     <script src="js/views.js"></script>
     <script src="data/co_school_districts.topo.js"></script>
