@@ -9,11 +9,31 @@ districtGeo = topojson.feature(districtsTopo, districtsTopo.objects.CDPHE_CDOE_S
 $(document).ready(function () {
     
     // Create backbone models and views
-    var result = new ResultModel({});
+    var result = new ResultModel({});    
     var view = new CalculatorView();
     $('#main-container').append(view.el);
     resultView = new ResultView({ model: result });
     $('#main-container').append(resultView.el);
+
+    // Go directly to result page with hard-coded data
+    if (app.config.debug) {
+        var income = 47791;
+        var passthrough = 0;
+        var homevalue = 78000;
+        var homeDistrict = districtInfo[102];
+        var taxInfo = getTax(income, passthrough);
+        console.log(taxInfo);
+        var propertyTaxInfo = getPropertyTaxHome(homevalue, homeDistrict);
+        //var businessDistrict = districtInfo[0];
+        //var businessTaxInfo = getPropertyTaxBusiness(1000000, businessDistrict);
+        result.set({
+            homeDistrict: homeDistrict,
+            taxInfo: taxInfo,
+            propertyTaxInfo: propertyTaxInfo
+        });
+        view.$el.hide();
+        resultView.render();        
+    }
     
     // Set up backbone routes
     var router = new AppRouter();
@@ -30,9 +50,13 @@ $(document).ready(function () {
         view.$el.hide();
         resultView.render();
     });
-    Backbone.history.start();
-    $("input:text").focus(function () { this.select(); });
-    $("#income").focus();
+    
+    // Initialize the router and focus the first element
+    if (!app.config.debug) {
+        Backbone.history.start();
+        $("input:text").focus(function () { this.select(); });
+        $("#income").focus();        
+    }
     
     // Handle calculator submission
     $("#calculator").submit(function (e) {
@@ -128,7 +152,7 @@ var taxBrackets = [
     {"max": 20000, "fti": 570030, "agi": 2578781},
     {"max": 25000, "fti": 1077294, "agi": 3197100},
     {"max": 35000, "fti": 3569116, "agi": 7569935},
-    {"max": 50000, "fti": 73569116, "agi": 12134442},
+    {"max": 50000, "fti": 7346866, "agi": 12134442},
     {"max": 75000, "fti": 14010762, "agi": 19990028},
     {"max": 100000, "fti": 14199255, "agi": 18590767},
     {"max": 250000, "fti": 42254500, "agi": 50815382},
@@ -200,10 +224,11 @@ var getTax = function (personalIncome, passthroughIncome) {
     // Flat state income tax
     var flat = 0.0463 * fti;
     var taxInfo = {
+        "income": personalIncome,
+        "agi": agi,
+        "fti": fti,
         "graduated": graduated,
         "flat": flat,
-        "fti": fti,
-        "income": personalIncome,
         "passthrough": passthroughIncome,
         "bracketAmounts": bracketAmounts
     };
